@@ -1,18 +1,64 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEyeOff } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
-    const navigate = useNavigate();
+    const { registerUser, signUpWithGoogle } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = (data) => {
-        console.log("User Data:", data);
-        // এখানে Firebase বা Backend এ পাঠাতে পারো
+        registerUser(data.email, data.password)
+            .then(userInfo => {
+                console.log("User Registered:", userInfo);
+                Swal.fire({
+                    title: "Registration Successful!",
+                    text: "You have successfully registered.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(() => {
+                    navigate("/");
+                });
+            })
+            .catch(error => {
+                console.error("Registration Error:", error);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonText: "Try Again",
+                });
+            });
+    };
+
+    const handleGoogleSignIn = () => {
+        signUpWithGoogle()
+            .then(result => {
+                console.log("Google Sign-in Success:", result);
+                Swal.fire({
+                    title: "Google Sign-In Successful!",
+                    text: "You are now logged in.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(() => {
+                    navigate("/");
+                });
+            })
+            .catch(error => {
+                console.error("Google Sign-in Error:", error);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonText: "Try Again",
+                });
+            });
     };
 
     return (
@@ -24,7 +70,6 @@ const Register = () => {
                 </p>
 
                 <form className="flex flex-col gap-4 w-full mt-4" onSubmit={handleSubmit(onSubmit)}>
-                    {/* Name Input */}
                     <div className="w-full">
                         <label className="block text-[#002D74] font-semibold mb-1">Full Name</label>
                         <input
@@ -35,8 +80,6 @@ const Register = () => {
                         />
                         {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                     </div>
-
-                    {/* Email Input */}
                     <div className="w-full">
                         <label className="block text-[#002D74] font-semibold mb-1">Email</label>
                         <input
@@ -47,8 +90,6 @@ const Register = () => {
                         />
                         {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                     </div>
-
-                    {/* Photo URL Input */}
                     <div className="w-full">
                         <label className="block text-[#002D74] font-semibold mb-1">Photo URL</label>
                         <input
@@ -58,8 +99,6 @@ const Register = () => {
                             {...register("photoURL")}
                         />
                     </div>
-
-                    {/* Password Input */}
                     <div className="w-full">
                         <label className="block text-[#002D74] font-semibold mb-1">Password</label>
                         <div className="relative w-full">
@@ -88,8 +127,6 @@ const Register = () => {
                         </div>
                         {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                     </div>
-
-                    {/* Register Button */}
                     <button
                         className="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full"
                         type="submit"
@@ -103,9 +140,8 @@ const Register = () => {
                     <p className="text-center text-sm my-2">OR</p>
                     <hr className="border-gray-300" />
                 </div>
-
-                {/* Google Sign-Up Button */}
                 <button
+                    onClick={handleGoogleSignIn}
                     className="w-full bg-white border border-gray-300 text-gray-700 flex items-center justify-center gap-2 p-2 rounded-lg mt-4 hover:bg-gray-200"
                 >
                     <FcGoogle size={22} /> Sign Up with Google

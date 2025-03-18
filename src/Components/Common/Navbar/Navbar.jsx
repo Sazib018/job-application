@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { user, logout } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logout()
+            .then(() => {
+                console.log("Logged out successfully");
+            })
+            .catch((error) => console.error("Logout Error:", error));
+    };
 
     return (
         <nav className="bg-white shadow-md w-full">
@@ -12,7 +22,6 @@ const Navbar = () => {
                     <span className="ml-2">
                         Next<span className="text-rose-500">Gen</span>
                     </span>
-
                 </div>
 
                 <button
@@ -38,27 +47,37 @@ const Navbar = () => {
                 <div className={`lg:flex items-center ${isOpen ? "block" : "hidden"} w-full lg:w-auto`}>
                     <ul className="flex flex-col lg:flex-row lg:space-x-6 w-full">
                         <li><Link to="/" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">Home</Link></li>
-
-                        <li><Link to="/documentations" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">Documentations
-                        </Link></li>
-
+                        <li><Link to="/documentations" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">Documentations</Link></li>
                         <li><Link to="/features" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">Features</Link></li>
-
                         <li><Link to="/faqs" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">FAQs</Link></li>
-
-                        <li> <a href="https://assignment-10-clint-837e6.web.app" target="_blank" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">
-                            Support
-                        </a>
+                        <li>
+                            <a href="https://assignment-10-clint-837e6.web.app" target="_blank" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">
+                                Support
+                            </a>
                         </li>
                     </ul>
                 </div>
 
                 <div className="hidden md:flex space-x-4">
-                    <NavLink to="/login" className="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700" > LogIn
-                    </NavLink>
-                    <button className="bg-sky-400 text-white px-4 py-2 rounded-lg hover:bg-sky-700"> Find Job</button>
+                    {user ? (
+                        <div className="flex items-center space-x-3">
+                            <img
+                                src={user.photoURL}
+                                alt={user.displayName}
+                                className="w-10 h-10 rounded-full border border-gray-300"
+                            />
+                            <span className="font-medium text-gray-700">{user.displayName}</span>
+                            <button onClick={handleLogOut} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                                Logout
+                            </button>
+                        </div>
+                    ) : (
+                        <NavLink to="/login" className="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700">
+                            LogIn
+                        </NavLink>
+                    )}
+                    <button className="bg-sky-400 text-white px-4 py-2 rounded-lg hover:bg-sky-700">Find Job</button>
                 </div>
-
             </div>
         </nav>
     );

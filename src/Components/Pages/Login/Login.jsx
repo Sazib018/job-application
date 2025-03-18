@@ -1,14 +1,66 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsEye } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FiEyeOff } from "react-icons/fi";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const { logIn, signUpWithGoogle } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const onSubmit = (data) => {
+        logIn(data.email, data.password)
+            .then((result) => {
+                console.log("Login Successful!", result.user);
+                Swal.fire({
+                    title: "Login Successful!",
+                    text: "Welcome back!",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(() => {
+                    navigate("/");
+                });
+            })
+            .catch((error) => {
+                console.error("Login Error:", error.message);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonText: "Try Again",
+                });
+            });
+    };
+
+    const handleGoogleSignIn = () => {
+        signUpWithGoogle()
+            .then((result) => {
+                console.log("Google Sign-in Success:", result.user);
+                Swal.fire({
+                    title: "Google Sign-In Successful!",
+                    text: "You are now logged in.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(() => {
+                    navigate("/");
+                });
+            })
+            .catch((error) => {
+                console.error("Google Sign-in Error:", error);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonText: "Try Again",
+                });
+            });
+    };
 
     return (
         <section className="bg-gray-100 min-h-screen flex justify-center items-center px-4">
@@ -18,25 +70,22 @@ const Login = () => {
                     If you already a member, easily log in now.
                 </p>
 
-                <form className="flex flex-col gap-4 w-full" >
-                    <input 
-                        className="p-2 mt-4 rounded-xl border w-full text-center" 
-                        type="email" 
-                        name="email" 
-                        placeholder="Email" 
-                        required 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                {/* 🔹 Form */}
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
+                    <input
+                        className="p-2 mt-4 rounded-xl border w-full text-center"
+                        type="email"
+                        placeholder="Email"
+                        {...register("email", { required: true })}
                     />
+                    {errors.email && <p className="text-red-500 text-xs">Email is required</p>}
+
                     <div className="relative w-full">
                         <input
                             className="p-2 rounded-xl border w-full text-center"
                             type={showPassword ? "text" : "password"}
-                            name="password"
                             placeholder="Password"
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            {...register("password", { required: true })}
                         />
                         {showPassword ? (
                             <FiEyeOff
@@ -52,8 +101,10 @@ const Login = () => {
                             />
                         )}
                     </div>
-                    <button 
-                        className="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full" 
+                    {errors.password && <p className="text-red-500 text-xs">Password is required</p>}
+
+                    <button
+                        className="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full"
                         type="submit"
                     >
                         Login
@@ -65,7 +116,8 @@ const Login = () => {
                     <hr className="border-gray-300" />
                 </div>
                 <button
-                    className="w-full bg-white border border-gray-300 text-gray-700 flex items-center justify-center gap-2 p-2 rounded-lg mt-4 hover:bg-gray-200" 
+                    onClick={handleGoogleSignIn}
+                    className="w-full bg-white border border-gray-300 text-gray-700 flex items-center justify-center gap-2 p-2 rounded-lg mt-4 hover:bg-gray-200"
                 >
                     <FcGoogle size={22} /> Login with Google
                 </button>
@@ -74,7 +126,7 @@ const Login = () => {
                 </div>
                 <div className="mt-4 text-sm flex flex-col items-center w-full">
                     <p>Don't have an account?</p>
-                    <button 
+                    <button
                         onClick={() => navigate("/register")}
                         className="bg-[#002D74] text-white px-5 py-2 rounded-xl hover:scale-110 hover:bg-[#206ab1] font-semibold duration-300 mt-2"
                     >
