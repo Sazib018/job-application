@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -54,8 +54,9 @@ const Navbar = () => {
                 </div>
 
                 <div className="hidden md:flex space-x-4">
-                    <button className="hidden lg:inline-block bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700"> LogIn</button>
-                    <button className="hidden lg:inline-block bg-sky-400 text-white px-4 py-2 rounded-lg hover:bg-sky-700"> Find Job</button>
+                    <NavLink to="/login" className="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700" > LogIn
+                    </NavLink>
+                    <button className="bg-sky-400 text-white px-4 py-2 rounded-lg hover:bg-sky-700"> Find Job</button>
                 </div>
 
             </div>
