@@ -29,7 +29,7 @@ const Banner = () => {
                         <h3 className="text-2xl font-bold text-gray-800">OUR JOBS</h3>
                         <p className="text-gray-600 mb-4">We connect people and job opportunities</p>
                         <div className="flex flex-col md:flex-row gap-2 mb-4">
-                            <input type="text" placeholder="Keyword Search" className="border p-2 w-full rounded focus:outline-none" />
+                            <input type="text" placeholder="Find Jobs" className="border p-2 w-full rounded focus:outline-none" />
                             <select className="border p-2 rounded w-full focus:outline-none">
                                 <option value="">Select Your Category</option>
                                 <option value="1">Commercial/Supply Chain</option>
