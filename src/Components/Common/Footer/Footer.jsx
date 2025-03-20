@@ -3,11 +3,11 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <footer className="bg-rose-400 text-white py-10 mt-10">
+        <footer className="bg-blue-50 text-white py-10 mt-10">
             <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
 
                 <div>
-                    <h2 className="text-2xl text-black font-bold">NextGen</h2>
+                    <h2 className="text-2xl text-black font-bold">Next<span className="text-blue-500">Gen</span></h2>
                     <p className="mt-2 text-black">NextGen is a technology-driven company that transforms future innovations into today’s reality.</p>
 
                     <button className="mt-2  rounded-md">

@@ -62,16 +62,16 @@ const Register = () => {
     };
 
     return (
-        <section className="bg-gray-100 min-h-screen flex justify-center items-center px-4">
-            <div className="bg-[#dfa674] rounded-2xl flex flex-col max-w-md w-full p-6 items-center shadow-lg">
-                <h2 className="font-bold text-3xl text-[#002D74] text-center">Register</h2>
-                <p className="text-sm mt-2 text-[#002D74] text-center">
+        <section className=" min-h-screen flex justify-center items-center px-4 mt-5">
+            <div className="bg-blue-50 rounded-2xl flex flex-col max-w-md w-full p-6 items-center shadow-lg">
+                <h2 className="font-bold text-3xl text-gray-800 text-center">Register</h2>
+                <p className="text-sm mt-2 text-gray-800 text-center">
                     Create an account to get started!
                 </p>
 
                 <form className="flex flex-col gap-4 w-full mt-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="w-full">
-                        <label className="block text-[#002D74] font-semibold mb-1">Full Name</label>
+                        <label className="block text-gray-800 font-semibold mb-1">Full Name</label>
                         <input
                             className="p-2 rounded-xl border w-full text-center"
                             type="text"
@@ -81,7 +81,7 @@ const Register = () => {
                         {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                     </div>
                     <div className="w-full">
-                        <label className="block text-[#002D74] font-semibold mb-1">Email</label>
+                        <label className="block text-gray-800 font-semibold mb-1">Email</label>
                         <input
                             className="p-2 rounded-xl border w-full text-center"
                             type="email"
@@ -91,7 +91,7 @@ const Register = () => {
                         {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                     </div>
                     <div className="w-full">
-                        <label className="block text-[#002D74] font-semibold mb-1">Photo URL</label>
+                        <label className="block text-gray-800 font-semibold mb-1">Photo URL</label>
                         <input
                             className="p-2 rounded-xl border w-full text-center"
                             type="text"
@@ -100,7 +100,7 @@ const Register = () => {
                         />
                     </div>
                     <div className="w-full">
-                        <label className="block text-[#002D74] font-semibold mb-1">Password</label>
+                        <label className="block text-gray-800 font-semibold mb-1">Password</label>
                         <div className="relative w-full">
                             <input
                                 className="p-2 rounded-xl border w-full text-center"
@@ -128,7 +128,7 @@ const Register = () => {
                         {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                     </div>
                     <button
-                        className="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full"
+                        className="bg-cyan-500 text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full"
                         type="submit"
                     >
                         Register
@@ -151,7 +151,7 @@ const Register = () => {
                     <p>Already have an account?</p>
                     <button
                         onClick={() => navigate("/login")}
-                        className="bg-[#002D74] text-white px-5 py-2 rounded-xl hover:scale-110 hover:bg-[#206ab1] font-semibold duration-300 mt-2" > Login
+                        className="bg-cyan-500 text-white px-5 py-2 rounded-xl hover:scale-110 hover:bg-[#206ab1] font-semibold duration-300 mt-2" > Login
                     </button>
                 </div>
             </div>

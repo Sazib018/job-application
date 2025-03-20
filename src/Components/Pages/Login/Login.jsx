@@ -63,28 +63,30 @@ const Login = () => {
     };
 
     return (
-        <section className="bg-gray-100 min-h-screen flex justify-center items-center px-4">
-            <div className="bg-[#dfa674] rounded-2xl flex flex-col max-w-md w-full p-6 items-center shadow-lg">
-                <h2 className="font-bold text-3xl text-[#002D74] text-center">Login</h2>
-                <p className="text-sm mt-2 text-[#002D74] text-center">
+        <section className=" min-h-screen flex justify-center items-center px-4">
+            <div className="bg-blue-50 rounded-2xl flex flex-col max-w-md w-full p-6 items-center shadow-lg">
+                <h2 className="font-bold text-3xl text-gray-800 text-center">Login</h2>
+                <p className="text-sm mt-2 text-gray-800 text-center">
                     If you already a member, easily log in now.
                 </p>
 
-                {/* 🔹 Form */}
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
+                  
+                    <label className="text-gray-800 font-medium">Email</label>
                     <input
-                        className="p-2 mt-4 rounded-xl border w-full text-center"
+                        className="p-2 rounded-xl border w-full text-center"
                         type="email"
-                        placeholder="Email"
+                        placeholder="Enter your email"
                         {...register("email", { required: true })}
                     />
                     {errors.email && <p className="text-red-500 text-xs">Email is required</p>}
 
+                    <label className="text-gray-800 font-medium">Password</label>
                     <div className="relative w-full">
                         <input
                             className="p-2 rounded-xl border w-full text-center"
                             type={showPassword ? "text" : "password"}
-                            placeholder="Password"
+                            placeholder="Enter your password"
                             {...register("password", { required: true })}
                         />
                         {showPassword ? (
@@ -103,13 +105,15 @@ const Login = () => {
                     </div>
                     {errors.password && <p className="text-red-500 text-xs">Password is required</p>}
 
+                   
                     <button
-                        className="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full"
+                        className="bg-cyan-500 text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full"
                         type="submit"
                     >
                         Login
                     </button>
                 </form>
+
                 <div className="mt-4 w-full">
                     <hr className="border-gray-300" />
                     <p className="text-center text-sm my-2">OR</p>
@@ -128,7 +132,7 @@ const Login = () => {
                     <p>Don't have an account?</p>
                     <button
                         onClick={() => navigate("/register")}
-                        className="bg-[#002D74] text-white px-5 py-2 rounded-xl hover:scale-110 hover:bg-[#206ab1] font-semibold duration-300 mt-2">Register
+                        className="bg-cyan-500 text-white px-5 py-2 rounded-xl hover:scale-110 hover:bg-[#206ab1] font-semibold duration-300 mt-2">Register
                     </button>
                 </div>
             </div>

@@ -14,12 +14,13 @@ const Banner = () => {
         <h1 className="text-4xl font-bold mb-3">Find Your Dream Job</h1>
         <p className="text-lg mb-5">
           Explore thousands of job opportunities and land your dream career today.
+          We are always here for you with something new.
         </p>
         <div className="flex gap-4 justify-center">
-          <button className="bg-rose-700 text-white px-4 py-2 rounded-lg hover:bg-rose-500">
+          <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
             Apply Jobs
           </button>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-500">
             See All Categories
           </button>
         </div>

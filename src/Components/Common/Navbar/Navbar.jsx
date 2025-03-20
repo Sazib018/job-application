@@ -18,9 +18,9 @@ const Navbar = () => {
         <nav className="bg-white shadow-md w-full">
             <div className="container mx-auto px-4 flex items-center justify-between py-4 w-full">
                 <div className="flex items-center text-3xl font-extrabold text-gray-800">
-                    <img className="w-[40px]" src="https://i.ibb.co.com/pjt54kgc/imgbin-job-interview-computer-icons-mock-interview-ielts-C1-Abr-JKtcr-Yv1-Gfv15wbhg5-Cb.jpg" alt="Job Website Logo" />
+                    <img className="w-[40px]" src="https://i.ibb.co.com/r28qZnP7/imgbin-job-interview-computer-icons-mock-interview-ielts-C1-Abr-JKtcr-Yv1-Gfv15wbhg5-Cb.png" alt="Job Website Logo" />
                     <span className="ml-2">
-                        Next<span className="text-rose-500">Gen</span>
+                        Next<span className="text-blue-500">Gen</span>
                     </span>
                 </div>
 
@@ -46,12 +46,12 @@ const Navbar = () => {
 
                 <div className={`lg:flex items-center ${isOpen ? "block" : "hidden"} w-full lg:w-auto`}>
                     <ul className="flex flex-col lg:flex-row lg:space-x-6 w-full">
-                        <li><Link to="/" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">Home</Link></li>
-                        <li><Link to="/documentations" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">Documentations</Link></li>
-                        <li><Link to="/features" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">Features</Link></li>
-                        <li><Link to="/faqs" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">FAQs</Link></li>
+                        <li><Link to="/" className=" hover:text-blue-400 text-base font-medium py-2 block">Home</Link></li>
+                        <li><Link to="/documentations" className=" hover:text-blue-400 text-base font-medium py-2 block">Documentations</Link></li>
+                        <li><Link to="/features" className=" hover:text-blue-400 text-base font-medium py-2 block">Features</Link></li>
+                        <li><Link to="/faqs" className=" hover:text-blue-400 text-base font-medium py-2 block">FAQs</Link></li>
                         <li>
-                            <a href="https://assignment-10-clint-837e6.web.app" target="_blank" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">
+                            <a href="https://assignment-10-clint-837e6.web.app" target="_blank" className=" hover:text-blue-400 text-base font-medium py-2 block">
                                My Web
                             </a>
                         </li>
@@ -70,11 +70,11 @@ const Navbar = () => {
                             </button>
                         </div>
                     ) : (
-                        <NavLink to="/login" className="bg-rose-700 text-white px-4 py-2 rounded-lg hover:bg-rose-500">
+                        <NavLink to="/login" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-500">
                             LogIn
                         </NavLink>
                     )}
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Find Job</button>
+                    <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Find Job</button>
                 </div>
             </div>
         </nav>
