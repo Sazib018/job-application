@@ -128,9 +128,7 @@ const Login = () => {
                     <p>Don't have an account?</p>
                     <button
                         onClick={() => navigate("/register")}
-                        className="bg-[#002D74] text-white px-5 py-2 rounded-xl hover:scale-110 hover:bg-[#206ab1] font-semibold duration-300 mt-2"
-                    >
-                        Register
+                        className="bg-[#002D74] text-white px-5 py-2 rounded-xl hover:scale-110 hover:bg-[#206ab1] font-semibold duration-300 mt-2">Register
                     </button>
                 </div>
             </div>

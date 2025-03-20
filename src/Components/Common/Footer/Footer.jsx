@@ -29,7 +29,7 @@ const Footer = () => {
                     <h3 className="text-lg text-black font-bold">Contact</h3>
                     <ul className="mt-2 space-y-2 text-black">
                         <li>Email: support@nextgen.com</li>
-                        <li>Phone: +123 456 789</li>
+                        <li>Phone: +08801828****</li>
                         <li>Location: NextGen IT Center , Dhaka.</li>
                     </ul>
                 </div>

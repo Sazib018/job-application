@@ -52,7 +52,7 @@ const Navbar = () => {
                         <li><Link to="/faqs" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">FAQs</Link></li>
                         <li>
                             <a href="https://assignment-10-clint-837e6.web.app" target="_blank" className="text-yellow-600 hover:text-yellow-400 text-base font-medium py-2 block">
-                                Support
+                               My Web
                             </a>
                         </li>
                     </ul>
