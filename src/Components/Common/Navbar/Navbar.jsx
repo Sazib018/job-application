@@ -70,11 +70,11 @@ const Navbar = () => {
                             </button>
                         </div>
                     ) : (
-                        <NavLink to="/login" className="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700">
+                        <NavLink to="/login" className="bg-rose-700 text-white px-4 py-2 rounded-lg hover:bg-rose-500">
                             LogIn
                         </NavLink>
                     )}
-                    <button className="bg-sky-400 text-white px-4 py-2 rounded-lg hover:bg-sky-700">Find Job</button>
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Find Job</button>
                 </div>
             </div>
         </nav>
