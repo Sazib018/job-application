@@ -1,4 +1,6 @@
 import React from "react";
+import animationData from "../../../assets/apply-job.json"
+import Lottie from "react-lottie-player";
 
 const Banner = () => {
   return (
@@ -17,7 +19,8 @@ const Banner = () => {
           We are always here for you with something new.
         </p>
         <div className="flex gap-4 justify-center">
-          <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+          <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center gap-2">
+            <Lottie loop animationData={animationData} play className="w-7 h-7" />
             Apply Jobs
           </button>
           <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-500">
