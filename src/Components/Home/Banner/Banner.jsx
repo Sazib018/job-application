@@ -5,7 +5,7 @@ import Lottie from "react-lottie-player";
 const Banner = () => {
   return (
     <div
-      className="relative w-full h-[400px] bg-cover bg-center flex items-center justify-center text-center text-white"
+      className="relative w-full h-[500px] bg-cover bg-center flex items-center justify-center text-center text-white"
       style={{
         backgroundImage: "url('https://i.ibb.co/WvdWyRgv/1690202104783.jpg')",
       }}
