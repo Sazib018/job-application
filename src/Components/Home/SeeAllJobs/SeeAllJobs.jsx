@@ -1,17 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { FaRegClock, FaUsers, FaMoneyBillWave, FaInfoCircle } from "react-icons/fa";
+import { FaRegClock, FaUsers, FaMoneyBillWave, FaInfoCircle, FaUserGraduate } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const SeeAllJobs = () => {
     const [jobsData, setJobsData] = useState([]);
+    const [filteredJobs, setFilteredJobs] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [jobType, setJobType] = useState('');
+    const [experience, setExperience] = useState('');
+    const [minSalary, setMinSalary] = useState('');
+    const [maxSalary, setMaxSalary] = useState('');
+
     const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:4000/jobs')
             .then(res => res.json())
-            .then(data => setJobsData(data))
+            .then(data => {
+                setJobsData(data);
+                setFilteredJobs(data);
+            })
             .catch(error => console.error('Error:', error));
     }, []);
+
+    useEffect(() => {
+        filterJobs();
+    }, [searchQuery, jobType, experience, minSalary, maxSalary, jobsData]);
+
+    const filterJobs = () => {
+        let filtered = jobsData.filter(job => {
+            const matchesSearch = job.job_title.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesType = jobType ? job.job_type.toLowerCase() === jobType.toLowerCase() : true;
+            const matchesExp = experience ? job.experience_level?.toLowerCase() === experience.toLowerCase() : true;
+
+            const [min, max] = job.salary_range.split('-').map(num => parseInt(num));
+            const matchesSalaryMin = minSalary ? max >= parseInt(minSalary) : true;
+            const matchesSalaryMax = maxSalary ? min <= parseInt(maxSalary) : true;
+
+            return matchesSearch && matchesType && matchesExp && matchesSalaryMin && matchesSalaryMax;
+        });
+        setFilteredJobs(filtered);
+    };
 
     const handleJobDetails = (id) => {
         navigate(`/jobs/${id}`);
@@ -19,47 +48,56 @@ const SeeAllJobs = () => {
 
     return (
         <div className='mb-9'>
-            {/* Header */}
             <div className="text-center py-10 px-4 md:px-8 lg:px-16 bg-white">
                 <h2 className="text-center text-3xl font-bold mb-8">Available Job Listings</h2>
-
             </div>
 
-            {/* Search + Title */}
-            <div className="relative w-full mb-2 max-w-xl mx-auto bg-white rounded-full">
+            <div className="max-w-6xl mx-auto mb-6 px-4 grid md:grid-cols-4 gap-4 items-center">
                 <input
                     type="text"
-                    name="query"
-                    id="query"
-                    placeholder="Search Hear"
-                    className="rounded-full w-full h-16 bg-transparent py-2 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md  "
+                    placeholder="Search by any Jobs"
+                    className="border rounded-lg px-4 py-2 w-full"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button
-                    type="submit"
-                    className="absolute inline-flex items-center h-10 px-4 py-2 text-sm text-white transition duration-150 ease-in-out rounded-full outline-none right-3 top-3 bg-blue-600 sm:px-6 sm:text-base sm:font-medium hover:bg-sky-400"
-                >
-                    <svg
-                        className="-ml-0.5 sm:-ml-1 mr-2 w-4 h-4 sm:h-5 sm:w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                    </svg>
-                    Search
-                </button>
+
+                <select className="border rounded-lg px-4 py-2 w-full" onChange={e => setJobType(e.target.value)}>
+                    <option value="">All Job Types</option>
+                    <option value="fulltime">Full Time</option>
+                    <option value="part-time">Part Time</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+
+                <select className="border rounded-lg px-4 py-2 w-full" onChange={e => setExperience(e.target.value)}>
+                    <option value="">All Experience Levels</option>
+                    <option value="entry">Entry</option>
+                    <option value="internship">Internship</option>
+                    <option value="junior">Junior</option>
+                    <option value="midlevel">Midlevel</option>
+                    <option value="senior">Senior</option>
+                </select>
+
+                <div className="flex gap-4 justify-center">
+                    <input
+                        type="number"
+                        placeholder="Min Salary"
+                        value={minSalary}
+                        onChange={(e) => setMinSalary(e.target.value)}
+                        className="border px-3 py-2 rounded-md w-36"
+                    />
+                    <input
+                        type="number"
+                        placeholder="Max Salary"
+                        value={maxSalary}
+                        onChange={(e) => setMaxSalary(e.target.value)}
+                        className="border px-3 py-2 rounded-md w-36"
+                    />
+                </div>
             </div>
 
-            {/* Job Cards */}
             <div className="py-10 p-3 bg-gray-100">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                    {jobsData.map((job) => (
+                    {filteredJobs.map((job) => (
                         <div
                             key={job._id}
                             className="bg-blue-50 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6"
@@ -82,6 +120,10 @@ const SeeAllJobs = () => {
                                     <strong>Total Applicants:</strong> {job.total_applicants}
                                 </p>
                                 <p className="flex items-center gap-2">
+                                    <FaUserGraduate className="text-purple-500" />
+                                    <strong>Experience:</strong> {job.experience_level}
+                                </p>
+                                <p className="flex items-center gap-2">
                                     <FaMoneyBillWave className="text-green-500" />
                                     <strong>Salary:</strong> {job.salary_range} {job.currency}
                                 </p>
@@ -93,7 +135,6 @@ const SeeAllJobs = () => {
                                 <FaInfoCircle className="text-lg" />
                                 Job Details
                             </button>
-
                         </div>
                     ))}
                 </div>
@@ -103,3 +144,4 @@ const SeeAllJobs = () => {
 };
 
 export default SeeAllJobs;
+ 
