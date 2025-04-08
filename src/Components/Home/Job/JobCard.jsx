@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaRegClock, FaUsers, FaMoneyBillWave } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const JobCard = () => {
     const [jobData, setJobData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showAll, setShowAll] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,13 +26,13 @@ const JobCard = () => {
 
     if (loading) return <p className="text-center mt-10">Loading...</p>;
 
-    const jobsToShow = showAll ? jobData : jobData.slice(0, 6);
+    const jobsToShow = jobData.slice(0, 6);
 
     return (
         <div className="py-10 p-3 bg-gray-100">
             <h2 className="text-center text-3xl font-bold mb-8">Available Job Listings</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 {jobsToShow.map((job) => (
                     <div
                         key={job._id}
@@ -64,7 +63,7 @@ const JobCard = () => {
 
                         <button
                             onClick={() => handleJobDetails(job._id)}
-                            className="mt-4 w-full py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1]  transition"
+                            className="mt-4 w-full py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1] transition"
                         >
                             Job Details
                         </button>
@@ -72,16 +71,13 @@ const JobCard = () => {
                 ))}
             </div>
 
-            {!showAll && jobData.length > 6 && (
-                <div className="text-center mt-8">
-                    <button
-                        onClick={() => setShowAll(true)}
-                        className="px-6 py-2 bg-sky-500 text-white rounded-lg hover:bg-blue-600 transition"
-                    >
-                        See All Jobs
+            <div className='text-center mt-6'>
+                <Link to="/seeAllJobs">
+                    <button className='px-6 py-2 bg-sky-500 text-white rounded-lg hover:bg-blue-600 transition'>
+                        See All
                     </button>
-                </div>
-            )}
+                </Link>
+            </div>
         </div>
     );
 };
