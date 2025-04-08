@@ -4,6 +4,7 @@ import Error from "../Pages/Error/Error";
 import Home from "../Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import JobDetails from "../Pages/JobDetails/JobDetails";
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
             {
                 path:"/login",
                 element:<Login></Login>
+            },
+            {
+                path:"/job/:id",
+                element:<JobDetails></JobDetails>
             },
             {
                 path:"/register",

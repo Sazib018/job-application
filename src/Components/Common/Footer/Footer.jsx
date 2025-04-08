@@ -38,10 +38,10 @@ const Footer = () => {
 
 
             <div className="flex justify-center space-x-4 mt-6">
-                <a href="#" className="text-black hover:text-white"><FaFacebook size={24} /></a>
-                <a href="#" className="text-black hover:text-white"><FaTwitter size={24} /></a>
-                <a href="#" className="text-black hover:text-white"><FaInstagram size={24} /></a>
-                <a href="#" className="text-black hover:text-white"><FaLinkedin size={24} /></a>
+                <a href="#" className="text-black hover:text-blue-400"><FaFacebook size={24} /></a>
+                <a href="#" className="text-black hover:text-blue-400"><FaTwitter size={24} /></a>
+                <a href="#" className="text-black hover:text-blue-400"><FaInstagram size={24} /></a>
+                <a href="#" className="text-black hover:text-blue-400"><FaLinkedin size={24} /></a>
             </div>
 
             <div className="text-center text-black mt-6 text-sm">

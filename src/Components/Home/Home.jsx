@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from './Banner/Banner';
-import AnimatedImages from './AnimatedImages/AnimatedImages';
+import JobCard from './Job/JobCard';
 
 const Home = () => {
     return (
@@ -8,8 +8,11 @@ const Home = () => {
            <div>
             <Banner></Banner>
             </div> 
-            <div>
+           {/*  <div>
                 <AnimatedImages></AnimatedImages>
+            </div> */}
+            <div>
+                <JobCard></JobCard>
             </div>
         </div>
     );
