@@ -22,7 +22,7 @@ const JobCard = () => {
     }, []);
 
     const handleJobDetails = (id) => {
-        navigate(`/job/${id}`);
+        navigate(`/jobs/${id}`);
     };
 
     if (loading) return <p className="text-center mt-10">Loading...</p>;
