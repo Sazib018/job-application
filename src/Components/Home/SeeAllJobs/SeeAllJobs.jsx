@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaRegClock, FaUsers, FaMoneyBillWave } from "react-icons/fa";
+import { FaRegClock, FaUsers, FaMoneyBillWave, FaInfoCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const SeeAllJobs = () => {
@@ -88,10 +88,12 @@ const SeeAllJobs = () => {
                             </div>
                             <button
                                 onClick={() => handleJobDetails(job._id)}
-                                className="mt-4 w-full py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1] transition"
+                                className="mt-4 w-full py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1] transition flex items-center justify-center gap-2"
                             >
+                                <FaInfoCircle className="text-lg" />
                                 Job Details
                             </button>
+
                         </div>
                     ))}
                 </div>
