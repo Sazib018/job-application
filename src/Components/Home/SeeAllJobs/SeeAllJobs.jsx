@@ -26,21 +26,44 @@ const SeeAllJobs = () => {
     useEffect(() => {
         filterJobs();
     }, [searchQuery, jobType, experience, minSalary, maxSalary, jobsData]);
-
+    
     const filterJobs = () => {
-        let filtered = jobsData.filter(job => {
-            const matchesSearch = job.job_title.toLowerCase().includes(searchQuery.toLowerCase());
-            const matchesType = jobType ? job.job_type.toLowerCase() === jobType.toLowerCase() : true;
-            const matchesExp = experience ? job.experience_level?.toLowerCase() === experience.toLowerCase() : true;
-
-            const [min, max] = job.salary_range.split('-').map(num => parseInt(num));
-            const matchesSalaryMin = minSalary ? max >= parseInt(minSalary) : true;
-            const matchesSalaryMax = maxSalary ? min <= parseInt(maxSalary) : true;
-
-            return matchesSearch && matchesType && matchesExp && matchesSalaryMin && matchesSalaryMax;
-        });
+        const filtered = jobsData
+            .filter(job => {
+                const query = searchQuery.toLowerCase();
+                return (
+                    job.job_title?.toLowerCase().includes(query) ||
+                    job.category?.toLowerCase().includes(query) ||
+                    job.location?.toLowerCase().includes(query)
+                );
+            })
+            .filter(job => {
+                return jobType ? job.job_type?.toLowerCase() === jobType.toLowerCase() : true;
+            })
+            
+            .filter(job => {
+                return experience ? job.experience_level?.toLowerCase() === experience.toLowerCase() : true;
+            })
+        
+            .filter(job => {
+                let min = 0, max = 0;
+    
+                if (typeof job.salary_range === 'string') {
+                    [min, max] = job.salary_range.split('-').map(n => parseInt(n));
+                } else if (typeof job.salary_range === 'object') {
+                    min = job.salary_range.min || 0;
+                    max = job.salary_range.max || 0;
+                }
+    
+                const meetsMin = minSalary ? max >= parseInt(minSalary) : true;
+                const meetsMax = maxSalary ? min <= parseInt(maxSalary) : true;
+    
+                return meetsMin && meetsMax;
+            });
+    
         setFilteredJobs(filtered);
     };
+    
 
     const handleJobDetails = (id) => {
         navigate(`/jobs/${id}`);
