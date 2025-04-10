@@ -8,6 +8,7 @@ const SeeAllJobs = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [jobType, setJobType] = useState('');
     const [experience, setExperience] = useState('');
+    const [salaryRange, setSalaryRange] = useState(''); // ✅ NEW
     const [minSalary, setMinSalary] = useState('');
     const [maxSalary, setMaxSalary] = useState('');
 
@@ -24,9 +25,21 @@ const SeeAllJobs = () => {
     }, []);
 
     useEffect(() => {
+        // Auto update min/max salary based on salaryRange dropdown
+        if (salaryRange) {
+            const [min, max] = salaryRange.split('-');
+            setMinSalary(min);
+            setMaxSalary(max);
+        } else {
+            setMinSalary('');
+            setMaxSalary('');
+        }
+    }, [salaryRange]);
+
+    useEffect(() => {
         filterJobs();
     }, [searchQuery, jobType, experience, minSalary, maxSalary, jobsData]);
-    
+
     const filterJobs = () => {
         const filtered = jobsData
             .filter(job => {
@@ -40,30 +53,28 @@ const SeeAllJobs = () => {
             .filter(job => {
                 return jobType ? job.job_type?.toLowerCase() === jobType.toLowerCase() : true;
             })
-            
             .filter(job => {
                 return experience ? job.experience_level?.toLowerCase() === experience.toLowerCase() : true;
             })
-        
             .filter(job => {
                 let min = 0, max = 0;
-    
                 if (typeof job.salary_range === 'string') {
-                    [min, max] = job.salary_range.split('-').map(n => parseInt(n));
-                } else if (typeof job.salary_range === 'object') {
+                    [min, max] = job.salary_range.split('-').map(number => parseInt(number));
+                }
+
+                 else if (typeof job.salary_range === 'object') {
                     min = job.salary_range.min || 0;
                     max = job.salary_range.max || 0;
                 }
-    
-                const meetsMin = minSalary ? max >= parseInt(minSalary) : true;
-                const meetsMax = maxSalary ? min <= parseInt(maxSalary) : true;
-    
-                return meetsMin && meetsMax;
+
+                const Min = minSalary ? max >= parseInt(minSalary) : true;
+                const Max = maxSalary ? min <= parseInt(maxSalary) : true;
+
+                return Min && Max;
             });
-    
+
         setFilteredJobs(filtered);
     };
-    
 
     const handleJobDetails = (id) => {
         navigate(`/jobs/${id}`);
@@ -106,22 +117,18 @@ const SeeAllJobs = () => {
                     <option value="senior">Senior</option>
                 </select>
 
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <input
-                        type="number"
-                        placeholder="Min Salary"
-                        value={minSalary}
-                        onChange={(e) => setMinSalary(e.target.value)}
-                        className="border px-3 py-2 rounded-md w-full"
-                    />
-                    <input
-                        type="number"
-                        placeholder="Max Salary"
-                        value={maxSalary}
-                        onChange={(e) => setMaxSalary(e.target.value)}
-                        className="border px-3 py-2 rounded-md w-full"
-                    />
-                </div>
+                <select
+                    className="border rounded-lg px-4 py-2 w-full"
+                    value={salaryRange}
+                    onChange={(e) => setSalaryRange(e.target.value)}
+                >
+                    <option value="">All Salary Ranges</option>
+                    <option value="0-10000">0 - 10,000</option>
+                    <option value="10000-20000">10,000 - 20,000</option>
+                    <option value="20000-35000">20,000 - 35,000</option>
+                    <option value="35000-60000">35,000 - 60,000</option>
+                    <option value="60000-100000">60,000 - 100,000</option>
+                </select>
             </div>
 
             <div className="py-10 px-4 bg-gray-100">
