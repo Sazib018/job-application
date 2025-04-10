@@ -8,7 +8,7 @@ const SeeAllJobs = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [jobType, setJobType] = useState('');
     const [experience, setExperience] = useState('');
-    const [salaryRange, setSalaryRange] = useState(''); // ✅ NEW
+    const [salaryRange, setSalaryRange] = useState(''); 
     const [minSalary, setMinSalary] = useState('');
     const [maxSalary, setMaxSalary] = useState('');
 
@@ -25,7 +25,6 @@ const SeeAllJobs = () => {
     }, []);
 
     useEffect(() => {
-        // Auto update min/max salary based on salaryRange dropdown
         if (salaryRange) {
             const [min, max] = salaryRange.split('-');
             setMinSalary(min);
