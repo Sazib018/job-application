@@ -74,7 +74,7 @@ const Navbar = () => {
                             LogIn
                         </NavLink>
                     )}
-                    <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Find Job</button>
+                    <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Jobs</button>
                 </div>
             </div>
         </nav>
