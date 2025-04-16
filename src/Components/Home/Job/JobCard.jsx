@@ -39,7 +39,7 @@ const JobCard = () => {
       </div>
     );
 
-  const jobsToShow = jobData.slice(0, 6);
+  const jobsToShow = jobData.slice(0, 4);
 
   return (
     <div className="py-10 px-4 bg-gray-100">

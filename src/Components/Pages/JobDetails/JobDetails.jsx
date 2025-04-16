@@ -51,6 +51,11 @@ const JobDetails = () => {
 
                     <p className="flex items-start gap-2"><FaTasks className="text-gray-500 mt-1" /><span><strong>Responsibilities:</strong> {job.responsibility}</span></p>
                 </div>
+                <button
+                    className="bg-blue-600 hover:bg-blue-700 mt-8 text-white px-6 py-2 rounded-full font-medium"
+                >
+                    Apply Now
+                </button>
             </div>
         </div>
     );

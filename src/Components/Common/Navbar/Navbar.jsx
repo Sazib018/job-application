@@ -52,7 +52,7 @@ const Navbar = () => {
                         <li><Link to="/faqs" className=" hover:text-blue-400 text-base font-medium py-2 block">FAQs</Link></li>
                         <li>
                             <a href="https://assignment-10-clint-837e6.web.app" target="_blank" className=" hover:text-blue-400 text-base font-medium py-2 block">
-                               My Web
+                                My Web
                             </a>
                         </li>
                     </ul>
@@ -74,7 +74,11 @@ const Navbar = () => {
                             LogIn
                         </NavLink>
                     )}
-                    <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Jobs</button>
+                    <Link to="/add-jobs">
+                        <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                            Add Jobs
+                        </button>
+                    </Link>
                 </div>
             </div>
         </nav>
