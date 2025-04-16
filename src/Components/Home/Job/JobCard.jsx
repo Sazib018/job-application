@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
-  FaRegClock,
-  FaUsers,
-  FaMoneyBillWave,
+  FaRegClock, FaUsers, FaMoneyBillWave,
   FaInfoCircle,
 } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const JobCard = () => {
   const [jobData, setJobData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:4000/jobs")
@@ -25,11 +22,7 @@ const JobCard = () => {
       });
   }, []);
 
-  const handleJobDetails = (id) => {
-    navigate(`/jobs/${id}`);
-  };
-
-  if (loading)
+  if (loading) {
     return (
       <div className="rounded-lg p-4 bg-gray-200 animate-pulse max-w-sm mx-auto mt-20">
         <div className="flex space-x-4 py-6">
@@ -43,6 +36,7 @@ const JobCard = () => {
         </div>
       </div>
     );
+  }
 
   const jobsToShow = jobData.slice(0, 4);
 
@@ -60,7 +54,7 @@ const JobCard = () => {
           >
             <div className="mb-4">
               <h3 className="text-xl font-semibold text-gray-800">
-                {job.job_title}
+                {job.title}
               </h3>
               <p className="text-sm text-gray-500 mt-1">{job.location}</p>
               <div className="flex flex-wrap justify-center gap-2 mt-2 text-sm text-gray-600">
@@ -80,33 +74,31 @@ const JobCard = () => {
               </p>
               <p className="flex items-center gap-2">
                 <FaUsers className="text-blue-500" />
-                <strong>Total Applicants:</strong> {job.total_applicants}
+                <strong>Total Applicants:</strong> {job. totalApplicants}
               </p>
               <p className="flex items-center gap-2">
                 <FaMoneyBillWave className="text-green-500" />
-                <strong>Salary:</strong>{" "}
-                {job.salary_range?.min?.toLocaleString()} -{" "}
-                {job.salary_range?.max?.toLocaleString()}{" "}
-                {job.salary_range?.currency}
+                <strong>Salary:</strong> {job.salary_range} {job.currency}
               </p>
             </div>
 
-            <button
-              onClick={() => handleJobDetails(job._id)}
-              className="mt-4 w-full py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1] transition flex items-center justify-center gap-2"
+            <Link
+              to={`/jobs/${job._id}`}
+              className="mt-4text-center mt-4 py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1] transition flex justify-center items-center gap-2"
             >
-              <FaInfoCircle className="text-lg" />
+              <FaInfoCircle className="text-white" />
               Job Details
-            </button>
+            </Link>
           </div>
         ))}
       </div>
 
-      <div className="text-center mt-6">
-        <Link to="/seeAllJobs">
-          <button className="px-6 py-2 bg-sky-500 text-white rounded-lg hover:bg-blue-600 transition">
-            See All
-          </button>
+      <div className="text-center mt-8">
+        <Link
+          to="/seeAllJobs"
+          className="px-6 py-2 bg-sky-500 text-white rounded-lg hover:bg-blue-600 transition"
+        >
+          See All
         </Link>
       </div>
     </div>

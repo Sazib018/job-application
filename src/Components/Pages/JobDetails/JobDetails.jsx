@@ -45,7 +45,7 @@ const JobDetails = () => {
 
                     <p className="flex items-start gap-2"><FaMoneyBillWave className="text-green-500 mt-1" /><span><strong>Salary:</strong> {job.salary_range} {job.currency}</span></p>
 
-                    <p className="flex items-start gap-2"><FaClipboardList className="text-cyan-500 mt-1" /><span><strong>Description:</strong> {job.job_description}</span></p>
+                    <p className="flex items-start gap-2"><FaClipboardList className="text-cyan-500 mt-1" /><span><strong>Description:</strong> {job.jobDescription}</span></p>
 
                     <p className="flex items-start gap-2"><FaTasks className="text-indigo-700 mt-1" /><span><strong>Requirements:</strong> {job.requirement}</span></p>
 
