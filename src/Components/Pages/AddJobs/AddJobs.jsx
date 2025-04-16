@@ -6,25 +6,21 @@ const AddJobs = () => {
         const form = e.target;
 
         const addJobs = {
-            title: form.title.value,
+            job_title: form.title.value,
             location: form.location.value,
-            jobType: form.jobType.value,
+            job_type: form.job_type.value,  
             category: form.category.value,
-            applicationDeadline: form.applicationDeadline.value,
-            description: form.description.value,
-            responsibilities: form.responsibilities.value
-                .split('\n')
-                .map((item) => item.trim())
-                .filter((item) => item),
-            requirements: form.requirements.value
-                .split('\n')
-                .map((item) => item.trim())
-                .filter((item) => item),
-            salaryRange: {
+            deadline: form.applicationDeadline.value, 
+            job_description: form.description.value,
+            responsibilities: form.responsibilities.value,
+            requirement: form.requirements.value,
+            salary_range: {
                 min: parseInt(form.min_salary.value),
                 max: parseInt(form.max_salary.value),
                 currency: form.currency.value,
             },
+            total_applicants: 0,
+            status: "active"
         };
 
         fetch('http://localhost:4000/Jobs', {
@@ -32,7 +28,7 @@ const AddJobs = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringift (addJobs),
+            body: JSON.stringify(addJobs),
         })
             .then((res) => res.json())
             .then((data) => {
@@ -51,7 +47,7 @@ const AddJobs = () => {
                         <div className="space-y-6 w-2/4 mx-auto">
                             <input name="title" type="text" placeholder="Job Title" required className="border p-2 w-full" />
                             <input name="location" type="text" placeholder="Location" required className="border p-2 w-full" />
-                            <input name="jobType" type="text" placeholder="Job Type" required className="border p-2 w-full" />
+                            <input name="job_type" type="text" placeholder="Job Type" required className="border p-2 w-full" />
                             <input name="category" type="text" placeholder="Category" required className="border p-2 w-full" />
                             <input name="applicationDeadline" type="date" required className="border p-2 w-full" />
                         </div>
@@ -67,7 +63,6 @@ const AddJobs = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <input name="min_salary" min={0} type="number" placeholder="Minimum Salary" required className="border p-2 w-full" />
                         <input name="max_salary" min={0} type="number" placeholder="Maximum Salary" required className="border p-2 w-full" />
-                        <input name="currency" type="text" placeholder="Currency (e.g., USD)" required className="border p-2 w-full" />
                     </div>
 
                     <button type="submit" className="w-full bg-blue-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 transition-all">

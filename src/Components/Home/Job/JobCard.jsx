@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaRegClock, FaUsers, FaMoneyBillWave, FaInfoCircle,} from "react-icons/fa";
+import {
+  FaRegClock,
+  FaUsers,
+  FaMoneyBillWave,
+  FaInfoCircle,
+} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const JobCard = () => {
@@ -79,7 +84,10 @@ const JobCard = () => {
               </p>
               <p className="flex items-center gap-2">
                 <FaMoneyBillWave className="text-green-500" />
-                <strong>Salary:</strong> {job.salary_range} {job.currency}
+                <strong>Salary:</strong>{" "}
+                {job.salary_range?.min?.toLocaleString()} -{" "}
+                {job.salary_range?.max?.toLocaleString()}{" "}
+                {job.salary_range?.currency}
               </p>
             </div>
 
