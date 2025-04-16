@@ -24,16 +24,13 @@ const JobDetails = () => {
     }, [id]);
 
 
-    if (loading) return <p className="text-center mt-10">Loading job details...</p>;
-    if (!job) return <p className="text-center mt-10">Job not found</p>;
-
     return (
         <div className="max-w-4xl mx-auto py-10 px-6">
             <div className="bg-blue-50 rounded-2xl shadow-md p-8">
                 <h2 className="text-3xl font-bold mb-6 text-center text-black">{job.job_title}</h2>
 
                 <div className="space-y-4 text-gray-700">
-                    <p className="flex items-start gap-2"><FaBuilding className="text-rose-400 mt-1" /><span><strong>Company Info:</strong> {job.company_information}</span></p>
+                    <p className="flex items-start gap-2"><FaBuilding className="text-rose-400 mt-1" /><span><strong>Company Info:</strong> {job.companyInformation}</span></p>
 
                     <p className="flex items-start gap-2"><FaMapMarkerAlt className="text-red-500 mt-1" /><span><strong>Location:</strong> {job.location}</span></p>
 

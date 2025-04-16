@@ -56,7 +56,7 @@ const JobCard = () => {
               <h3 className="text-xl font-semibold text-gray-800">
                 {job.title}
               </h3>
-              <p className="text-sm text-gray-500 mt-1">{job.location}</p>
+              <p className="text-sm text-gray-500 text-center mt-1">{job.location}</p>
               <div className="flex flex-wrap justify-center gap-2 mt-2 text-sm text-gray-600">
                 <span className="bg-green-100 text-green-700 px-2 py-1 rounded">
                   {job.job_type}
@@ -74,7 +74,7 @@ const JobCard = () => {
               </p>
               <p className="flex items-center gap-2">
                 <FaUsers className="text-blue-500" />
-                <strong>Total Applicants:</strong> {job. totalApplicants}
+                <strong>Total Applicants:</strong> {job.totalApplicants}
               </p>
               <p className="flex items-center gap-2">
                 <FaMoneyBillWave className="text-green-500" />

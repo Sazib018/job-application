@@ -139,26 +139,26 @@ const SeeAllJobs = () => {
                         >
                             <div>
                                 <h3 className="text-xl font-semibold text-gray-800">{job.job_title}</h3>
-                                <p className="text-sm text-gray-500 mt-1">{job.location}</p>
+                                <p className="text-sm text-center text-gray-500 mt-1">{job.location}</p>
                                 <div className="flex flex-wrap justify-center gap-2 mt-2 text-sm text-gray-600">
                                     <span className="bg-green-100 text-green-700 px-2 py-1 rounded">{job.job_type}</span>
                                     <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">{job.category}</span>
                                 </div>
 
                                 <div className="text-sm text-gray-600 space-y-2 mt-4">
-                                    <p className="flex items-center gap-2">
+                                    <p className="flex items-center text-center justify-center gap-2">
                                         <FaRegClock className="text-orange-500" />
                                         <strong>Deadline:</strong> {job.deadline}
                                     </p>
-                                    <p className="flex items-center gap-2">
+                                    <p className="flex items-center text-center justify-center gap-2">
                                         <FaUsers className="text-blue-500" />
-                                        <strong>Total Applicants:</strong> {job.total_applicants}
+                                        <strong>Total Applicants:</strong> {job.totalApplicants}
                                     </p>
-                                    <p className="flex items-center gap-2">
+                                    <p className="flex items-center text-center justify-center gap-2">
                                         <FaUserGraduate className="text-purple-500" />
-                                        <strong>Experience:</strong> {job.experience_level}
+                                        <strong>Experience:</strong> {job.experience}
                                     </p>
-                                    <p className="flex items-center gap-2">
+                                    <p className="flex items-center text-center justify-center gap-2">
                                         <FaMoneyBillWave className="text-green-500" />
                                         <strong>Salary:</strong> {job.salary_range} {job.currency}
                                     </p>
