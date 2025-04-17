@@ -87,7 +87,7 @@ const JobCard = () => {
               className="mt-4text-center mt-4 py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1] transition flex justify-center items-center gap-2"
             >
               <FaInfoCircle className="text-white" />
-              Job Details
+              View Details
             </Link>
           </div>
         ))}

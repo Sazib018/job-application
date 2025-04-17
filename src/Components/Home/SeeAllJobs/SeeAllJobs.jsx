@@ -170,7 +170,7 @@ const SeeAllJobs = () => {
                                 className="mt-6 w-full py-2 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-[#206ab1] transition flex items-center justify-center gap-2"
                             >
                                 <FaInfoCircle className="text-lg" />
-                                Job Details
+                                View Details
                             </button>
                         </div>
                     ))}

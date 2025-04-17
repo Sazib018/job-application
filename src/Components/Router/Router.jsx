@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import JobDetails from "../Pages/JobDetails/JobDetails";
 import SeeAllJobs from "../Home/seeAllJobs/seeAllJobs";
 import AddJobs from "../Pages/AddJobs/AddJobs";
+import JobApplicationForm from "../Pages/JobApplicationForm/JobApplicationForm";
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path:"/add-jobs",
                 element:<AddJobs></AddJobs>
+            },
+            {
+                path:"/application",
+                element:<JobApplicationForm></JobApplicationForm>
             },
             {
                 path:"/register",

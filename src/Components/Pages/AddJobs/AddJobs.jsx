@@ -6,13 +6,13 @@ import toast from 'react-hot-toast';
 const AddJobs = () => {
 
     const mutation = useMutation({
-        mutationFn: (data)=> toast.promise(
-           axios.post('http://localhost:4000/jobs', data),
-           {
-            loading: 'Submitting...',
-            success: 'Submitted successfully!',
-            error: 'Submission failed.',
-          }
+        mutationFn: (data) => toast.promise(
+            axios.post('http://localhost:4000/jobs', data),
+            {
+                loading: 'Submitting...',
+                success: 'Submitted successfully!',
+                error: 'Submission failed.',
+            }
         )
     })
 
@@ -31,23 +31,25 @@ const AddJobs = () => {
             requirement: form.requirements.value,
             companyInformation: form.companyInformation.value,
             total_applicants: 0,
+            salaryRange: form.salaryRange.value,
+            currency: form.currency.value,
             status: "active"
         };
         mutation.mutate(addJobs)
 
-      /*   fetch('http://localhost:4000/jobs', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(addJobs),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log('Job added:', data);
-                form.reset();
-            })
-            .catch((err) => console.error('Error:', err)); */
+        /*   fetch('http://localhost:4000/jobs', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(addJobs),
+          })
+              .then((res) => res.json())
+              .then((data) => {
+                  console.log('Job added:', data);
+                  form.reset();
+              })
+              .catch((err) => console.error('Error:', err)); */
     };
 
     return (
@@ -66,16 +68,16 @@ const AddJobs = () => {
                                 <input name="location" type="text" placeholder="Location" required className="border p-2 w-full" />
                             </div>
                             <div>
-                                <label  className="block font-medium mb-1">Job Type</label>
+                                <label className="block font-medium mb-1">Job Type</label>
                                 <input name="job_type" type="text" placeholder="Job Type" required className="border p-2 w-full" />
                             </div>
                             <div>
-                                <label  className="block font-medium mb-1">Category</label>
-                                <input  name="category" type="text" placeholder="Category" required className="border p-2 w-full" />
+                                <label className="block font-medium mb-1">Category</label>
+                                <input name="category" type="text" placeholder="Category" required className="border p-2 w-full" />
                             </div>
                             <div>
-                                <label  className="block font-medium mb-1">Application Deadline</label>
-                                <input  name="deadline" type="date" required className="border p-2 w-full" />
+                                <label className="block font-medium mb-1">Application Deadline</label>
+                                <input name="deadline" type="date" required className="border p-2 w-full" />
                             </div>
                         </div>
                     </div>
@@ -92,13 +94,29 @@ const AddJobs = () => {
                                 <textarea name="responsibility" placeholder="Responsibilities" rows={3} className="border p-2 w-full" />
                             </div>
                             <div>
-                                <label  className="block font-medium mb-1">Requirements</label>
-                                <textarea  name="requirements" placeholder="Requirements" rows={3} className="border p-2 w-full" />
+                                <label className="block font-medium mb-1">Requirements</label>
+                                <textarea name="requirements" placeholder="Requirements" rows={3} className="border p-2 w-full" />
                             </div>
                             <div>
                                 <label className="block font-medium mb-1">Company Information</label>
                                 <textarea name="companyInformation" placeholder="Company Info" rows={3} className="border p-2 w-full" required />
                             </div>
+                        </div>
+                        <div>
+                            <label className="block font-medium mb-1">Salary Range</label>
+                            <select name="salaryRange" required className="border p-2 w-full">
+                                <option value="" disabled selected>Select a range</option>
+                                <option value="20,000 - 30,000">20,000 - 30,000</option>
+                                <option value="30,000 - 50,000">30,000 - 50,000</option>
+                                <option value="50,000 - 70,000">50,000 - 70,000</option>
+                                <option value="70,000 - 100,000">70,000 - 100,000</option>
+                                <option value="100,000+">100,000+</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block font-medium mb-1">Currency</label>
+                            <input name="currency" type="text" placeholder="e.g. USD, BDT" required className="border p-2 w-full" />
                         </div>
                     </div>
 
