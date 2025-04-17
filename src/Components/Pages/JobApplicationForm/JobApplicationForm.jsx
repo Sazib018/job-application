@@ -1,12 +1,20 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useParams } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const JobApplicationForm = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
 
-  const handleSubmit = (e) => {
+
+  const mutation = useMutation({
+    mutationFn: (data) => axios.post("http://localhost:4000/jobs", data),
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -36,7 +44,17 @@ const JobApplicationForm = () => {
       status: "pending"
     };
 
-    console.log(application);
+  
+    toast.promise(
+      mutation.mutateAsync(application),
+      {
+        loading: 'Submitting your application...',
+        success: 'Application submitted successfully!',
+        error: 'Submission failed. Please try again.',
+      }
+    );
+
+    form.reset();
   };
 
   return (
@@ -46,74 +64,22 @@ const JobApplicationForm = () => {
     >
       <h2 className="text-3xl font-bold text-blue-600 mb-4">Apply for the Job</h2>
 
-      <textarea
-        name="careerSummary"
-        rows="4"
-        placeholder="Career Summary"
-        className="w-full border border-blue-300 rounded-lg p-4"
-        required
-      />
+      <textarea name="careerSummary" rows="4" placeholder="Career Summary" className="w-full border border-blue-300 rounded-lg p-4" required />
 
-      <input
-        type="text"
-        name="skills"
-        placeholder="Skills (comma separated)"
-        className="w-full border border-blue-300 rounded-lg p-4"
-        required
-      />
+      <input type="text" name="skills" placeholder="Skills (comma separated)" className="w-full border border-blue-300 rounded-lg p-4" required />
 
-      <input
-        type="text"
-        name="experience"
-        placeholder="Experience"
-        className="w-full border border-blue-300 rounded-lg p-4"
-        required
-      />
+      <input type="text" name="experience" placeholder="Experience" className="w-full border border-blue-300 rounded-lg p-4" required />
 
-      <textarea
-        name="whyHire"
-        rows="3"
-        placeholder="Why should we hire you?"
-        className="w-full border border-blue-300 rounded-lg p-4"
-        required
-      />
+      <textarea name="whyHire" rows="3" placeholder="Why should we hire you?" className="w-full border border-blue-300 rounded-lg p-4" required />
 
       <div className="flex flex-col md:flex-row gap-4">
-        <input
-          type="number"
-          name="minSalary"
-          placeholder="Minimum Salary"
-          className="w-full border border-blue-300 rounded-lg p-4"
-          required
-        />
-        <input
-          type="number"
-          name="maxSalary"
-          placeholder="Maximum Salary"
-          className="w-full border border-blue-300 rounded-lg p-4"
-          required
-        />
+        <input type="number" name="minSalary" placeholder="Minimum Salary" className="w-full border border-blue-300 rounded-lg p-4" required />
+        <input type="number" name="maxSalary" placeholder="Maximum Salary" className="w-full border border-blue-300 rounded-lg p-4" required />
       </div>
 
-      <input
-        type="url"
-        name="portfolio"
-        placeholder="Portfolio Link"
-        className="w-full border border-blue-300 rounded-lg p-4"
-      />
-      <input
-        type="url"
-        name="linkedin"
-        placeholder="LinkedIn Profile"
-        className="w-full border border-blue-300 rounded-lg p-4"
-      />
-      <input
-        type="url"
-        name="resume"
-        placeholder="Resume Link"
-        className="w-full border border-blue-300 rounded-lg p-4"
-        required
-      />
+      <input type="url" name="portfolio" placeholder="Portfolio Link" className="w-full border border-blue-300 rounded-lg p-4" />
+      <input type="url" name="linkedin" placeholder="LinkedIn Profile" className="w-full border border-blue-300 rounded-lg p-4" />
+      <input type="url" name="resume" placeholder="Resume Link" className="w-full border border-blue-300 rounded-lg p-4" required />
 
       <div className="space-y-3">
         <label className="flex gap-3 items-center">
@@ -130,7 +96,7 @@ const JobApplicationForm = () => {
         </label>
       </div>
 
-      {/* Hidden job info fields */}
+    
       <input type="hidden" name="job_title" value="Backend Developer" />
       <input type="hidden" name="job_type" value="Full-time" />
       <input type="hidden" name="category" value="Software" />
@@ -139,7 +105,7 @@ const JobApplicationForm = () => {
 
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 rounded-xl transition duration-300"
+        className="w-full bg-blue-600 hover:bg-sky-400 text-white text-lg font-semibold py-3 rounded-xl transition duration-300"
       >
         Apply Now
       </button>

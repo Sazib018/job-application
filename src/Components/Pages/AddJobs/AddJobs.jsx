@@ -14,7 +14,9 @@ const AddJobs = () => {
                 error: 'Submission failed.',
             }
         )
+        
     })
+
 
     const handleSubmitForm = (e) => {
         e.preventDefault();

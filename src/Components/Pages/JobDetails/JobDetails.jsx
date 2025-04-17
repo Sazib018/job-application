@@ -88,7 +88,7 @@ const JobDetails = () => {
                 <div className="text-center mt-8">
                     <Link
                         to={'/application'}
-                        className="inline-block bg-sky-600 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-sky-700 transition duration-200"
+                        className="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-sky-400 transition duration-200"
                     >
                         Application Now
                     </Link>

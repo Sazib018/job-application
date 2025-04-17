@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from './Banner/Banner';
 import JobCard from './Job/JobCard';
+import ApplicationList from './ApplicationList/ApplicationList';
 
 const Home = () => {
     return (
@@ -13,6 +14,9 @@ const Home = () => {
             </div> */}
             <div>
                 <JobCard></JobCard>
+            </div>
+            <div>
+                <ApplicationList></ApplicationList>
             </div>
         </div>
     );
