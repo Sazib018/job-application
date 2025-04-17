@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -8,10 +8,10 @@ import { toast } from "react-hot-toast";
 const JobApplicationForm = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
-
+  const navigate = useNavigate();
 
   const mutation = useMutation({
-    mutationFn: (data) => axios.post("http://localhost:4000/jobs", data),
+    mutationFn: (data) => axios.post("http://localhost:4000/applications", data),
   });
 
   const handleSubmit = async (e) => {
@@ -41,20 +41,20 @@ const JobApplicationForm = () => {
       skillsAligned: form.skillsAligned.checked,
       confident: form.confident.checked,
       submitted_At: new Date().toISOString(),
-      status: "pending"
+      status: "pending",
     };
 
-  
     toast.promise(
-      mutation.mutateAsync(application),
+      mutation.mutateAsync(application).then(() => {
+        form.reset();
+        navigate("/");
+      }),
       {
-        loading: 'Submitting your application...',
-        success: 'Application submitted successfully!',
-        error: 'Submission failed. Please try again.',
+        loading: "Submitting your application...",
+        success: "Application submitted successfully!",
+        error: "Submission failed. Please try again.",
       }
     );
-
-    form.reset();
   };
 
   return (
@@ -65,11 +65,8 @@ const JobApplicationForm = () => {
       <h2 className="text-3xl font-bold text-blue-600 mb-4">Apply for the Job</h2>
 
       <textarea name="careerSummary" rows="4" placeholder="Career Summary" className="w-full border border-blue-300 rounded-lg p-4" required />
-
       <input type="text" name="skills" placeholder="Skills (comma separated)" className="w-full border border-blue-300 rounded-lg p-4" required />
-
       <input type="text" name="experience" placeholder="Experience" className="w-full border border-blue-300 rounded-lg p-4" required />
-
       <textarea name="whyHire" rows="3" placeholder="Why should we hire you?" className="w-full border border-blue-300 rounded-lg p-4" required />
 
       <div className="flex flex-col md:flex-row gap-4">
@@ -96,7 +93,7 @@ const JobApplicationForm = () => {
         </label>
       </div>
 
-    
+      
       <input type="hidden" name="job_title" value="Backend Developer" />
       <input type="hidden" name="job_type" value="Full-time" />
       <input type="hidden" name="category" value="Software" />

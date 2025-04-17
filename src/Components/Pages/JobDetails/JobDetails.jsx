@@ -17,17 +17,9 @@ const JobDetails = () => {
 
     useEffect(() => {
         fetch(`http://localhost:4000/jobs/${id}`)
-            .then((res) => {
-                console.log("Response:", res);
-                return res.json();
-            })
-            .then((data) => {
-                setJob(data);
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+            .then((res) => res.json())
+            .then((data) => setJob(data))
+            .catch((error) => console.error("Error:", error));
     }, [id]);
 
     return (
@@ -75,19 +67,32 @@ const JobDetails = () => {
 
                     <p className="flex items-start gap-2">
                         <FaTasks className="text-indigo-700 mt-1" />
-                        <span><strong>Requirements:</strong> {job?.requirement}</span>
+                        <span><strong>Requirements:</strong> {job?.
+                            Requirement}</span>
                     </p>
 
                     <p className="flex items-start gap-2">
                         <FaTasks className="text-gray-500 mt-1" />
-                        <span><strong>Responsibilities:</strong> {job?.responsibility}</span>
+                        <span><strong>Responsibilities:</strong> {job?.
+                            Responsibility
+                        }</span>
                     </p>
                 </div>
 
-                {/* Apply Now Button */}
-                <div className="text-center mt-8">
+                {/* Go Back Home Button */}
+                <div className="text-center mt-10">
                     <Link
-                        to={'/application'}
+                        to="/"
+                        className="inline-block bg-gray-300 text-black font-medium px-6 py-2 rounded-lg shadow hover:bg-gray-400 transition duration-200"
+                    >
+                        Go Back Home
+                    </Link>
+                </div>
+
+                {/* Apply Now Button */}
+                <div className="text-center mt-4">
+                    <Link
+                        to="/application"
                         className="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-sky-400 transition duration-200"
                     >
                         Application Now
