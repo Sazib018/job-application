@@ -138,7 +138,7 @@ const SeeAllJobs = () => {
                             className="bg-blue-50 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between"
                         >
                             <div>
-                                <h3 className="text-xl font-semibold text-gray-800">{job.job_title}</h3>
+                                <h3 className="text-xl text-center font-semibold text-gray-800">{job.jobTitle}</h3>
                                 <p className="text-sm text-center text-gray-500 mt-1">{job.location}</p>
                                 <div className="flex flex-wrap justify-center gap-2 mt-2 text-sm text-gray-600">
                                     <span className="bg-green-100 text-green-700 px-2 py-1 rounded">{job.job_type}</span>
