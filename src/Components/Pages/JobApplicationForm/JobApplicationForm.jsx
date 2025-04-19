@@ -22,6 +22,7 @@ const JobApplicationForm = () => {
       userName: user?.displayName,
       userEmail: user?.email,
       userPhoto: user?.photoURL,
+
       job_id: id,
       job_title: form.job_title.value,
       job_type: form.job_type.value,
@@ -32,8 +33,7 @@ const JobApplicationForm = () => {
       skills: form.skills.value,
       experience: form.experience.value,
       whyHire: form.whyHire.value,
-      minSalary: form.minSalary.value,
-      maxSalary: form.maxSalary.value,
+      salaryRange: form.salaryRange.value,
       portfolio: form.portfolio.value,
       linkedin: form.linkedin.value,
       resume: form.resume.value,
@@ -64,19 +64,77 @@ const JobApplicationForm = () => {
     >
       <h2 className="text-3xl font-bold text-blue-600 mb-4">Apply for the Job</h2>
 
-      <textarea name="careerSummary" rows="4" placeholder="Career Summary" className="w-full border border-blue-300 rounded-lg p-4" required />
-      <input type="text" name="skills" placeholder="Skills (comma separated)" className="w-full border border-blue-300 rounded-lg p-4" required />
-      <input type="text" name="experience" placeholder="Experience" className="w-full border border-blue-300 rounded-lg p-4" required />
-      <textarea name="whyHire" rows="3" placeholder="Why should we hire you?" className="w-full border border-blue-300 rounded-lg p-4" required />
+      <textarea
+        name="job_title"
+        rows="2"
+        placeholder="Job Title"
+        className="w-full border border-blue-300 rounded-lg p-4"
+        required
+      />
 
-      <div className="flex flex-col md:flex-row gap-4">
-        <input type="number" name="minSalary" placeholder="Minimum Salary" className="w-full border border-blue-300 rounded-lg p-4" required />
-        <input type="number" name="maxSalary" placeholder="Maximum Salary" className="w-full border border-blue-300 rounded-lg p-4" required />
-      </div>
+      <textarea
+        name="careerSummary"
+        rows="4"
+        placeholder="Career Summary"
+        className="w-full border border-blue-300 rounded-lg p-4"
+        required
+      />
 
-      <input type="url" name="portfolio" placeholder="Portfolio Link" className="w-full border border-blue-300 rounded-lg p-4" />
-      <input type="url" name="linkedin" placeholder="LinkedIn Profile" className="w-full border border-blue-300 rounded-lg p-4" />
-      <input type="url" name="resume" placeholder="Resume Link" className="w-full border border-blue-300 rounded-lg p-4" required />
+      <input
+        type="text"
+        name="skills"
+        placeholder="Skills (comma separated)"
+        className="w-full border border-blue-300 rounded-lg p-4"
+        required
+      />
+
+      <input
+        type="text"
+        name="experience"
+        placeholder="Experience"
+        className="w-full border border-blue-300 rounded-lg p-4"
+        required
+      />
+
+      <textarea
+        name="whyHire"
+        rows="3"
+        placeholder="Why should we hire you?"
+        className="w-full border border-blue-300 rounded-lg p-4"
+        required
+      />
+
+      <select name="salaryRange" required className="w-full border border-blue-300 rounded-lg p-4">
+        <option value="" disabled selected>Select Salary Range</option>
+        <option value="0-10000">0 - 10,000</option>
+        <option value="10000-20000">10,000 - 20,000</option>
+        <option value="20000-30000">20,000 - 30,000</option>
+        <option value="30000-50000">30,000 - 50,000</option>
+        <option value="50000-70000">50,000 - 70,000</option>
+        <option value="70000-100000">70,000 - 100,000</option>
+        <option value="100000+">100,000+</option>
+      </select>
+
+
+      <input
+        type="url"
+        name="portfolio"
+        placeholder="Portfolio Link"
+        className="w-full border border-blue-300 rounded-lg p-4"
+      />
+      <input
+        type="url"
+        name="linkedin"
+        placeholder="LinkedIn Profile"
+        className="w-full border border-blue-300 rounded-lg p-4"
+      />
+      <input
+        type="url"
+        name="resume"
+        placeholder="Resume Link"
+        className="w-full border border-blue-300 rounded-lg p-4"
+        required
+      />
 
       <div className="space-y-3">
         <label className="flex gap-3 items-center">
@@ -93,8 +151,7 @@ const JobApplicationForm = () => {
         </label>
       </div>
 
-      
-      <input type="hidden" name="job_title" value="Backend Developer" />
+      {/* Hidden fields for now - can also be made visible like job title */}
       <input type="hidden" name="job_type" value="Full-time" />
       <input type="hidden" name="category" value="Software" />
       <input type="hidden" name="location" value="Remote" />

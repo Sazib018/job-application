@@ -14,7 +14,7 @@ const AddJobs = () => {
                 error: 'Submission failed.',
             }
         )
-        
+
     })
 
 
@@ -37,7 +37,11 @@ const AddJobs = () => {
             currency: form.currency.value,
             status: "active"
         };
-        mutation.mutate(addJobs)
+        mutation.mutate(addJobs, {
+            onSuccess: () => {
+                form.reset()
+            }
+        })
 
         /*   fetch('http://localhost:4000/jobs', {
               method: 'POST',
@@ -108,12 +112,15 @@ const AddJobs = () => {
                             <label className="block font-medium mb-1">Salary Range</label>
                             <select name="salaryRange" required className="border p-2 w-full">
                                 <option value="" disabled selected>Select a range</option>
+                                <option value="0 - 10,000">0 - 10,000</option>
+                                <option value="10,000 - 20,000">10,000 - 20,000</option>
                                 <option value="20,000 - 30,000">20,000 - 30,000</option>
                                 <option value="30,000 - 50,000">30,000 - 50,000</option>
                                 <option value="50,000 - 70,000">50,000 - 70,000</option>
                                 <option value="70,000 - 100,000">70,000 - 100,000</option>
                                 <option value="100,000+">100,000+</option>
                             </select>
+
                         </div>
 
                         <div>

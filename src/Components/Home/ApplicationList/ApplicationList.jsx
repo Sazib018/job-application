@@ -25,20 +25,20 @@ const ApplicationList = () => {
   });
 
   const handleWithdraw = (id) => {
-    toast((t) => (
+    toast((i) => (
       <span>
         Are you sure you want to withdraw?
         <div className="mt-2 flex justify-end gap-2">
           <button
             onClick={() => {
               mutation.mutate(id);
-              toast.dismiss(t.id);
+              toast.dismiss(i.id);
             }}
             className="bg-red-500 text-white px-3 py-1 rounded"
           >
             Yes
           </button>
-          <button onClick={() => toast.dismiss(t.id)} className="px-3 py-1 border rounded">
+          <button onClick={() => toast.dismiss(i.id)} className="px-3 py-1 border rounded">
             Cancel
           </button>
         </div>

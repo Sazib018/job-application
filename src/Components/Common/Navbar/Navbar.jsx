@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
@@ -14,11 +14,20 @@ const Navbar = () => {
             .catch((error) => console.error("Logout Error:", error));
     };
 
+    const navItemClass = ({ isActive }) =>
+        isActive
+            ? "text-blue-500 text-base font-medium py-2 block"
+            : "hover:text-blue-400 text-base font-medium py-2 block";
+
     return (
         <nav className="bg-white shadow-md w-full">
             <div className="container mx-auto px-4 flex items-center justify-between py-4 w-full">
                 <div className="flex items-center text-3xl font-extrabold text-gray-800">
-                    <img className="w-[40px]" src="https://i.ibb.co.com/r28qZnP7/imgbin-job-interview-computer-icons-mock-interview-ielts-C1-Abr-JKtcr-Yv1-Gfv15wbhg5-Cb.png" alt="Job Website Logo" />
+                    <img
+                        className="w-[40px]"
+                        src="https://i.ibb.co.com/r28qZnP7/imgbin-job-interview-computer-icons-mock-interview-ielts-C1-Abr-JKtcr-Yv1-Gfv15wbhg5-Cb.png"
+                        alt="Job Website Logo"
+                    />
                     <span className="ml-2">
                         Next<span className="text-blue-500">Gen</span>
                     </span>
@@ -46,12 +55,17 @@ const Navbar = () => {
 
                 <div className={`lg:flex items-center ${isOpen ? "block" : "hidden"} w-full lg:w-auto`}>
                     <ul className="flex flex-col lg:flex-row lg:space-x-6 w-full">
-                        <li><Link to="/" className=" hover:text-blue-400 text-base font-medium py-2 block">Home</Link></li>
-                        <li><Link to="/my-job" className=" hover:text-blue-400 text-base font-medium py-2 block">My Job</Link></li>
-                        <li><Link to="/features" className=" hover:text-blue-400 text-base font-medium py-2 block">Features</Link></li>
-                        <li><Link to="/faqs" className=" hover:text-blue-400 text-base font-medium py-2 block">FAQs</Link></li>
+                        <li><NavLink to="/" className={navItemClass}>Home</NavLink></li>
+                        <li><NavLink to="/my-job" className={navItemClass}>My Job</NavLink></li>
+                        <li><NavLink to="/features" className={navItemClass}>Features</NavLink></li>
+                        <li><NavLink to="/faqs" className={navItemClass}>FAQs</NavLink></li>
                         <li>
-                            <a href="https://assignment-10-clint-837e6.web.app" target="_blank" className=" hover:text-blue-400 text-base font-medium py-2 block">
+                            <a
+                                href="https://assignment-10-clint-837e6.web.app"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-blue-400 text-base font-medium py-2 block"
+                            >
                                 My Web
                             </a>
                         </li>
@@ -63,6 +77,7 @@ const Navbar = () => {
                         <div className="flex items-center space-x-3">
                             <img
                                 src={user.photoURL}
+                                alt="User"
                                 className="w-10 h-10 rounded-full border border-gray-300"
                             />
                             <button onClick={handleLogOut} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
@@ -84,4 +99,5 @@ const Navbar = () => {
         </nav>
     );
 };
+
 export default Navbar;

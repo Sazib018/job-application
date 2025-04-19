@@ -1,17 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const MyPostedJobs = () => {
   const [jobs, setJobs] = useState([]);
-  const userEmail = "user@gmail.com";
+  const { user } = useContext(AuthContext); 
+console.log(user);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/jobs?email=${userEmail}`)
-      .then(res => setJobs(res.data))
-      .catch(error => console.error(error));
-  }, [userEmail]);
+    if (user?.email) {
+      axios.get(`http://localhost:4000/jobs?email=${user.email}`)
+        .then(res => setJobs(res.data))
+        .catch(error => console.error(error));
+    }
+  }, [user]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -24,13 +28,13 @@ const MyPostedJobs = () => {
     }).then(result => {
       if (result.isConfirmed) {
         axios.delete(`http://localhost:4000/jobs/${id}`)
-          .then(response => {
-            if (response.data.deletedCount > 0) {
+          .then(res => {
+            if (res.data.deletedCount > 0) {
               Swal.fire('Deleted!', 'The job has been deleted.', 'success');
               setJobs(jobs.filter(job => job._id !== id));
             }
           })
-          .catch(error => console.error("There was an error deleting the job:", error));
+          .catch(error => console.error(error));
       }
     });
   };
@@ -55,7 +59,7 @@ const MyPostedJobs = () => {
                 <td className="py-2 px-4">{job.job_type}</td>
                 <td className="py-2 px-4 space-x-2">
                   <Link to={`/review-application/${job._id}`}>
-                    <button className="bg-blue-500 text-white px-3 py-1 rounded">Review  Application</button>
+                    <button className="bg-blue-500 text-white px-3 py-1 rounded">Review Application</button>
                   </Link>
                   <Link to={`/update-job/${job._id}`}>
                     <button className="bg-yellow-500 text-white px-3 py-1 rounded">Edit Job</button>
