@@ -47,7 +47,7 @@ const Navbar = () => {
                 <div className={`lg:flex items-center ${isOpen ? "block" : "hidden"} w-full lg:w-auto`}>
                     <ul className="flex flex-col lg:flex-row lg:space-x-6 w-full">
                         <li><Link to="/" className=" hover:text-blue-400 text-base font-medium py-2 block">Home</Link></li>
-                        <li><Link to="/documentations" className=" hover:text-blue-400 text-base font-medium py-2 block">Documentations</Link></li>
+                        <li><Link to="/my-job" className=" hover:text-blue-400 text-base font-medium py-2 block">My Job</Link></li>
                         <li><Link to="/features" className=" hover:text-blue-400 text-base font-medium py-2 block">Features</Link></li>
                         <li><Link to="/faqs" className=" hover:text-blue-400 text-base font-medium py-2 block">FAQs</Link></li>
                         <li>

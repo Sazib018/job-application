@@ -8,6 +8,8 @@ import JobDetails from "../Pages/JobDetails/JobDetails";
 import SeeAllJobs from "../Home/seeAllJobs/seeAllJobs";
 import AddJobs from "../Pages/AddJobs/AddJobs";
 import JobApplicationForm from "../Pages/JobApplicationForm/JobApplicationForm";
+import MyPostedJobs from "../Pages/MyPostedJobs/MyPostedJobs";
+
 
 export const router = createBrowserRouter([
     {
@@ -24,7 +26,7 @@ export const router = createBrowserRouter([
                 element:<Login></Login>
             },
             {
-                path:"/seeAllJobs",
+                path:"/seealljob",
                 element:<SeeAllJobs></SeeAllJobs>
             },
             {
@@ -38,6 +40,10 @@ export const router = createBrowserRouter([
             {
                 path:"/application",
                 element:<JobApplicationForm></JobApplicationForm>
+            },
+            {
+                path:"/my-job",
+                element:<MyPostedJobs></MyPostedJobs>
             },
             {
                 path:"/register",

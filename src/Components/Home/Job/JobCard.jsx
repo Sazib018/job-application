@@ -53,8 +53,8 @@ const JobCard = () => {
             className="bg-blue-50 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6"
           >
             <div className="mb-4">
-              <h3 className="text-xl font-semibold text-gray-800">
-                {job.title}
+              <h3 className="text-xl text-center font-semibold text-gray-800">
+                {job.jobTitle}
               </h3>
               <p className="text-sm text-gray-500 text-center mt-1">{job.location}</p>
               <div className="flex flex-wrap justify-center gap-2 mt-2 text-sm text-gray-600">
