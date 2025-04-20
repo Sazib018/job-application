@@ -74,7 +74,7 @@ const JobCard = () => {
               </p>
               <p className="flex items-center gap-2">
                 <FaUsers className="text-blue-500" />
-                <strong>Total Applicants:</strong> {job.totalApplicants}
+                <strong>Total Applicants:</strong> {job.totalapplicants}
               </p>
               <p className="flex items-center gap-2">
                 <FaMoneyBillWave className="text-green-500" />

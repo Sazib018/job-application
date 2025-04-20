@@ -152,7 +152,7 @@ const SeeAllJobs = () => {
                                     </p>
                                     <p className="flex items-center text-center justify-center gap-2">
                                         <FaUsers className="text-blue-500" />
-                                        <strong>Total Applicants:</strong> {job.totalApplicants}
+                                        <strong>Total Applicants:</strong> {job.totalapplicants}
                                     </p>
                                     <p className="flex items-center text-center justify-center gap-2">
                                         <FaUserGraduate className="text-purple-500" />

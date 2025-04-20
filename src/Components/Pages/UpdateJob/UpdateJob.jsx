@@ -18,7 +18,7 @@ const UpdateJob = () => {
         e.preventDefault();
 
         const updatedJob = {
-            jobTitle: e.target.jobTitle.value,
+            jobTitle: e.target.title.value,
             category: e.target.category.value,
             location: e.target.location.value,
             salaryRange: e.target.salaryRange.value,
@@ -28,10 +28,12 @@ const UpdateJob = () => {
         };
 
         await axios.put(`http://localhost:4000/jobs/${id}`, updatedJob);
-        navigate(`/job/${id}`); // Redirect to job details after update
+        navigate(`/jobs/${id}`);
     };
 
-    if (!job) return <p>Loading...</p>;
+    if (!job) {
+        return <div className="text-center py-10">Loading job details...</div>;
+    }
 
     return (
         <div className="max-w-3xl mx-auto px-6 py-10 bg-white shadow-2xl rounded-2xl">
@@ -64,12 +66,12 @@ const UpdateJob = () => {
 
                 <div>
                     <label className="block text-gray-700 font-semibold mb-1">Job Description</label>
-                    <textarea name="description" defaultValue={job.jobDescription} placeholder="Enter job description" rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    <textarea name="description" defaultValue={job.description || job.jobDescription} placeholder="Enter job description" rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                 </div>
 
                 <div>
                     <label className="block text-gray-700 font-semibold mb-1">Requirements</label>
-                    <textarea name="requirements" defaultValue={job.requirement} placeholder="Enter requirements" rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    <textarea name="requirements" defaultValue={job.requirements || job.requirement} placeholder="Enter requirements" rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                 </div>
 
                 <div className="text-center">
@@ -79,7 +81,7 @@ const UpdateJob = () => {
                 </div>
             </form>
         </div>
-    )
+    );
 };
 
 export default UpdateJob;

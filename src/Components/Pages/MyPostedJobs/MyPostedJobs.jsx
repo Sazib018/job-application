@@ -58,7 +58,7 @@ console.log(user);
                 <td className="py-2 px-4">{job.location}</td>
                 <td className="py-2 px-4">{job.job_type}</td>
                 <td className="py-2 px-4 space-x-2">
-                  <Link to={`/review-application/${job._id}`}>
+                  <Link>
                     <button className="bg-blue-500 text-white px-3 py-1 rounded">Review Application</button>
                   </Link>
                   <Link to={`/update-job/${job._id}`}>
