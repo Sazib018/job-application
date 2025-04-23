@@ -57,7 +57,7 @@ const Navbar = () => {
                     <ul className="flex flex-col lg:flex-row lg:space-x-6 w-full">
                         <li><NavLink to="/" className={navItemClass}>Home</NavLink></li>
                         <li><NavLink to="/my-job" className={navItemClass}>My Job</NavLink></li>
-                        <li><NavLink to="/features" className={navItemClass}>Features</NavLink></li>
+                        <li><NavLink to="/applications" className={navItemClass}>Applications</NavLink></li>
                         <li><NavLink to="/faqs" className={navItemClass}>FAQs</NavLink></li>
                         <li>
                             <a

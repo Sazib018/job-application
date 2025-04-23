@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { AuthContext } from '../../Providers/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
 
 const MyPostedJobs = () => {
-  const [jobs, setJobs] = useState([]);
+ 
   const { user } = useContext(AuthContext); 
-console.log(user);
+// console.log(user);
 
-  useEffect(() => {
-    if (user?.email) {
-      axios.get(`http://localhost:4000/jobs?email=${user.email}`)
-        .then(res => setJobs(res.data))
-        .catch(error => console.error(error));
-    }
-  }, [user]);
+const {data, isSuccess, refetch} = useQuery({
+  queryKey: ['myJobs', user.email],
+  queryFn: ({ queryKey }) => {
+    return axios.get(`http://localhost:4000/jobs?email=${queryKey[1]}`);
+  }
+});
+console.log(data?.data);
+
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -31,7 +33,7 @@ console.log(user);
           .then(res => {
             if (res.data.deletedCount > 0) {
               Swal.fire('Deleted!', 'The job has been deleted.', 'success');
-              setJobs(jobs.filter(job => job._id !== id));
+              refetch()
             }
           })
           .catch(error => console.error(error));
@@ -52,13 +54,13 @@ console.log(user);
             </tr>
           </thead>
           <tbody>
-            {jobs.map(job => (
+            {isSuccess && data?.data?.map(job => (
               <tr key={job._id} className="border-t">
                 <td className="py-2 px-4">{job.jobTitle}</td>
                 <td className="py-2 px-4">{job.location}</td>
                 <td className="py-2 px-4">{job.job_type}</td>
                 <td className="py-2 px-4 space-x-2">
-                  <Link>
+                  <Link to={`/my-job/${job._id}`}>
                     <button className="bg-blue-500 text-white px-3 py-1 rounded">Review Application</button>
                   </Link>
                   <Link to={`/update-job/${job._id}`}>
@@ -73,7 +75,7 @@ console.log(user);
                 </td>
               </tr>
             ))}
-            {jobs.length === 0 && (
+            {data?.data?.length === 0 && (
               <tr>
                 <td colSpan="4" className="text-center py-4 text-gray-500">
                   You haven't posted any jobs yet.

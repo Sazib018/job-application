@@ -15,9 +15,9 @@ const Home = () => {
             <div>
                 <JobCard></JobCard>
             </div>
-            <div>
+            {/* <div>
                 <ApplicationList></ApplicationList>
-            </div>
+            </div> */}
         </div>
     );
 };

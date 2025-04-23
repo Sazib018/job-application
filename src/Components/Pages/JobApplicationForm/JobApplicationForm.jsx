@@ -24,7 +24,6 @@ const JobApplicationForm = () => {
       userPhoto: user?.photoURL,
 
       job_id: id,
-      job_title: form.job_title.value,
       job_type: form.job_type.value,
       category: form.category.value,
       location: form.location.value,
@@ -64,13 +63,6 @@ const JobApplicationForm = () => {
     >
       <h2 className="text-3xl font-bold text-blue-600 mb-4">Apply for the Job</h2>
 
-      <textarea
-        name="job_title"
-        rows="2"
-        placeholder="Job Title"
-        className="w-full border border-blue-300 rounded-lg p-4"
-        required
-      />
 
       <textarea
         name="careerSummary"
@@ -136,20 +128,21 @@ const JobApplicationForm = () => {
         required
       />
 
-      <div className="space-y-3">
-        <label className="flex gap-3 items-center">
-          <input type="checkbox" name="readyToWork" className="accent-blue-500" />
-          Ready to work on preferred location
-        </label>
-        <label className="flex gap-3 items-center">
-          <input type="checkbox" name="skillsAligned" className="accent-blue-500" />
-          My skills are aligned with job requirements
-        </label>
-        <label className="flex gap-3 items-center">
-          <input type="checkbox" name="confident" className="accent-blue-500" />
-          I believe I can fulfill all job responsibilities
-        </label>
-      </div>
+<div className="space-y-3">
+  <label className="flex gap-3 items-center">
+    <input type="checkbox" name="readyToWork" className="accent-blue-500" required />
+    Ready to work on preferred location
+  </label>
+  <label className="flex gap-3 items-center">
+    <input type="checkbox" name="skillsAligned" className="accent-blue-500" required />
+    My skills are aligned with job requirements
+  </label>
+  <label className="flex gap-3 items-center">
+    <input type="checkbox" name="confident" className="accent-blue-500" required />
+    I believe I can fulfill all job responsibilities
+  </label>
+</div>
+
 
       {/* Hidden fields for now - can also be made visible like job title */}
       <input type="hidden" name="job_type" value="Full-time" />
