@@ -6,6 +6,7 @@ import { FiEyeOff } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
     const { logIn, signUpWithGoogle } = useContext(AuthContext);
@@ -18,6 +19,11 @@ const Login = () => {
         logIn(data.email, data.password)
             .then((result) => {
                 console.log("Login Successful!", result.user);
+                axios.post("http://localhost:4000/jwt", { email: data.email }, { withCredentials: true })
+                    .then((res) => {
+                        console.log( res.data);
+                    })
+
                 Swal.fire({
                     title: "Login Successful!",
                     text: "Welcome back!",
@@ -71,7 +77,7 @@ const Login = () => {
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
-                  
+
                     <label className="text-gray-800 font-medium">Email</label>
                     <input
                         className="p-2 rounded-xl border w-full text-center"
@@ -105,7 +111,7 @@ const Login = () => {
                     </div>
                     {errors.password && <p className="text-red-500 text-xs">Password is required</p>}
 
-                   
+
                     <button
                         className="bg-cyan-500 text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium w-full"
                         type="submit"
